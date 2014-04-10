@@ -98,6 +98,7 @@ class WikiURLPatterns(object):
     def get_article_path_urls(self):
         urlpatterns = patterns('',
             # Paths decided by URLs
+	    url('^(?P<path>.+/|)_plain-wiki/$', article.Plainwiki.as_view(), name='plain_wiki'),
             url('^(?P<path>.+/|)_create/$', self.article_create_view_class.as_view(), name='create'),
             url('^(?P<path>.+/|)_delete/$', self.article_delete_view_class.as_view(), name='delete'),
             url('^(?P<path>.+/|)_deleted/$', self.article_deleted_view_class.as_view(), name='deleted'),

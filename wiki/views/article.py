@@ -121,6 +121,17 @@ class Create(FormView, ArticleMixin):
         c['editor'] = editors.getEditor()
         return c
 
+class Plainwiki(ArticleMixin, TemplateView):
+
+    template_name="wiki/plain-wiki.html"
+
+    @method_decorator(get_article(can_read=True))
+    def dispatch(self, request, article, *args, **kwargs):
+        return super(Plainwiki, self).dispatch(request, article, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        kwargs['selected_tab'] = 'view'
+        return ArticleMixin.get_context_data(self, **kwargs)
 
 class Delete(FormView, ArticleMixin):
 
