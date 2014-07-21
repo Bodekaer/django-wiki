@@ -63,6 +63,7 @@ urlpatterns += patterns('',
     url('^(?P<path>.+/|)_revision/merge/(?P<revision_id>\d+)/$', 'wiki.views.article.merge', name='merge_revision'),
     url('^(?P<path>.+/|)_plugin/(?P<slug>\w+)/$', article.Plugin.as_view(), name='plugin'),
     url('^(?P<path>.+/|)$', article.ArticleView.as_view(), name='get'),   
+    url('^(?P<path>.+/|)_plain-wiki/$', article.Plainwiki.as_view(), name='plain_wiki'),
 )
 
 def get_pattern(app_name="wiki", namespace="wiki"):

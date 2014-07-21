@@ -520,6 +520,19 @@ class Settings(ArticleMixin, TemplateView):
         return super(Settings, self).get_context_data(**kwargs)
 
 
+class Plainwiki(ArticleMixin, TemplateView):
+
+    template_name = "wiki/plain-wiki.html"
+
+    @method_decorator(get_article(can_read=True))
+    def dispatch(self, request, article, *args, **kwargs):
+        return super(Plainwiki, self).dispatch(request, article, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        kwargs['selected_tab'] = 'view'
+        return ArticleMixin.get_context_data(self, **kwargs)
+
+
 # TODO: Throw in a class-based view
 @get_article(can_write=True, not_locked=True)
 def change_revision(request, article, revision_id=None, urlpath=None):
