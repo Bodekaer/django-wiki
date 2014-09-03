@@ -13,7 +13,7 @@ WIKI_LANGUAGE = 'markdown'
 # extend the built-in editor and customize it....
 EDITOR = getattr(django_settings, 'WIKI_EDITOR', 'wiki.editors.markitup.MarkItUp')
 
-MARKDOWN_EXTENSIONS = getattr(django_settings, 'WIKI_MARKDOWN_EXTENSIONS', ['extra', 'toc'])
+MARKDOWN_EXTENSIONS = getattr(django_settings, 'WIKI_MARKDOWN_EXTENSIONS', ['extra', 'toc', 'superscript', 'subscript'])
 
 # This slug is used in URLPath if an article has been deleted. The children of the
 # URLPath of that article are moved to lost and found. They keep their permissions
@@ -60,10 +60,10 @@ CAN_ADMIN = getattr(django_settings, 'WIKI_CAN_ADMIN', lambda article, user: use
 ANONYMOUS = getattr(django_settings, 'WIKI_ANONYMOUS', True)
 
 # Globally enable write access for anonymous users, if true anonymous users will be treated
-# as the others_write boolean field on models.Article. 
+# as the others_write boolean field on models.Article.
 ANONYMOUS_WRITE = getattr(django_settings, 'WIKI_ANONYMOUS_WRITE', False)
 
-# Sign up, login and logout views should be accessible 
+# Sign up, login and logout views should be accessible
 ACCOUNT_HANDLING = getattr(django_settings, 'WIKI_ACCOUNT_HANDLING', True)
 
 if ACCOUNT_HANDLING:
