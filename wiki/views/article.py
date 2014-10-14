@@ -33,6 +33,7 @@ class ArticleView(ArticleMixin, TemplateView):
     
     def get_context_data(self, **kwargs):
         kwargs['selected_tab'] = 'view'
+        kwargs['course_id'] = self.kwargs.get('course_id')
         return ArticleMixin.get_context_data(self, **kwargs)
 
 class Create(FormView, ArticleMixin):
