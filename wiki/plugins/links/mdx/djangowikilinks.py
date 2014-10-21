@@ -50,7 +50,7 @@ class WikiPathExtension(markdown.Extension):
         self.md = md
 
         # append to end of inline patterns
-        WIKI_RE =  r'\[(?P<linkTitle>[^\]]+?)\]\((?P<linkType>(wiki|prev|next)):(?P<wikiTitle>[a-zA-Z\d\./_-]*)\)'
+        WIKI_RE =  r'\[(?P<linkTitle>[^\]]+?)\]\((?P<linkType>(wiki|prev|next|back)):(?P<wikiTitle>[a-zA-Z\d\./_-]*)\)'
         wikiPathPattern = WikiPath(WIKI_RE, self.config, markdown_instance=md)
         wikiPathPattern.md = md
         md.inlinePatterns.add('djangowikipath', wikiPathPattern, "<reference")
@@ -111,12 +111,13 @@ class WikiPath(markdown.inlinepatterns.Pattern):
                 path = self.config['base_url'][0] + path_from_link
 
         label = m.group('linkTitle')
+
         link_type = m.group('linkType')
         extra_class = ""
-        if link_type == 'prev':
-            extra_class = " wikiprevpath"
-        if link_type == 'next':
-            extra_class = " wikinextpath"
+        link_types = ['prev', 'next', 'back']
+        if link_type in link_types:
+            extra_class = " wiki{}path".format(link_type)
+
         a = etree.Element('a')
         a.set('href', path)
         if not urlpath and self.config['live_lookups']:
